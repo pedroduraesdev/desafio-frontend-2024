@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WeatherService } from './services/weather.service';
 import { PokemonService } from './services/pokemon.service';
+import { get } from 'node:http';
 
 @Component({
   selector: 'app-root',
@@ -21,22 +22,53 @@ export class AppComponent {
   isRaining: boolean = false;
   pokemonName: string = '';
   pokemonImage: string = '';
+  weatherImage: string = '';
+  cityFound: string = '';
 
   constructor(
     private weatherService: WeatherService,
     private pokemonService: PokemonService
   ) { }
 
+
+
+
   searchWeatherAndPokemon() {
     this.weatherService.getWeather(this.city).subscribe((weatherData) => {
-      this.temperature = weatherData.main.temp;
+      this.temperature = weatherData.main.temp !== null ? Math.trunc(weatherData.main.temp) : null;
       this.isRaining = weatherData.weather.some((w: any) => w.main === 'Rain');
+      this.cityFound = weatherData.name;
 
       this.pokemonType = this.getPokemonType();
       this.getPokemon(this.pokemonType);
-      
+
+      // Chama getWeatherImage() para atualizar a imagem do clima
+      this.getWeatherImage();
     });
   }
+
+
+  getWeatherImage() {
+    this.weatherService.getWeather(this.city).subscribe((weatherData) => {
+      if (weatherData.weather && weatherData.weather[0].main.toLowerCase() === "clouds") {
+        this.weatherImage = "clouds.png";
+        console.log("work")
+      } else if (weatherData.weather[0].main.toLowerCase() === "clear") {
+        this.weatherImage = "clear.png"; 
+      } else if (weatherData.weather[0].main.toLowerCase() === "rain") {
+        this.weatherImage = "rain.png";
+      } else if (weatherData.weather[0].main.toLowerCase() === "drizzle") {
+        this.weatherImage = "drizzle.png";
+      } else if (weatherData.weather[0].main.toLowerCase() === "mist") {
+        this.weatherImage = "mist.png";
+      } else if (weatherData.weather[0].main.toLowerCase() === "snow") {
+        this.weatherImage = "snow.png";
+      } else {
+        this.weatherImage = "";
+      }
+    });
+  }
+
 
   getPokemonType(): string {
     if (this.isRaining) return 'electric';
