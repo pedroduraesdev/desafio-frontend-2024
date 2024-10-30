@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WeatherService } from './services/weather.service';
 import { PokemonService } from './services/pokemon.service';
+import { CountryService } from './services/country.service';
 import { get } from 'node:http';
 
 @Component({
@@ -25,6 +26,7 @@ export class AppComponent {
   weatherImage: string = '';
   cityFound: string = '';
   showWeather: boolean = false;
+  country: string = '';
 
   constructor(
     private weatherService: WeatherService,
@@ -39,6 +41,7 @@ export class AppComponent {
       this.temperature = weatherData.main.temp !== null ? Math.trunc(weatherData.main.temp) : null;
       this.isRaining = weatherData.weather.some((w: any) => w.main === 'Rain');
       this.cityFound = weatherData.name;
+      this.country = weatherData.sys.country;
 
       this.pokemonType = this.getPokemonType();
       this.getPokemon(this.pokemonType);
