@@ -24,6 +24,7 @@ export class AppComponent {
   pokemonImage: string = '';
   weatherImage: string = '';
   cityFound: string = '';
+  showWeather: boolean = false;
 
   constructor(
     private weatherService: WeatherService,
@@ -44,6 +45,10 @@ export class AppComponent {
 
       // Chama getWeatherImage() para atualizar a imagem do clima
       this.getWeatherImage();
+
+      //Mostra os cards com clima e pokemon
+      this.showWeather = true; 
+
     });
   }
 
@@ -98,7 +103,7 @@ export class AppComponent {
 
   fetchPokemonImage(pokemonUrl: string) {
     this.pokemonService.getPokemonData(pokemonUrl).subscribe((data) => {
-      this.pokemonImage = data.sprites.other.showdown.front_default;
+      this.pokemonImage = data.sprites.other.showdown.front_default || data.sprites.front_default;
     });
   }
 
