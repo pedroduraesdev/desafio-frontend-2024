@@ -13,7 +13,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeather(city: string): Observable<any> {
-    const url = `${this.baseUrl}?q=${city}&appid=${environment.openWeatherMapApiKey}&units=metric`;
+    const url = `${this.baseUrl}?q=${city}&appid=${environment.openWeatherMapApiKey}&units=metric&lang=pt_br`;
     return this.http.get(url).pipe(map((data: any) => data));
   }
 }

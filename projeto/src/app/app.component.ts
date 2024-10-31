@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WeatherService } from './services/weather.service';
 import { PokemonService } from './services/pokemon.service';
-import { CountryService } from './services/country.service';
 import { get } from 'node:http';
 
 @Component({
@@ -27,6 +26,8 @@ export class AppComponent {
   cityFound: string = '';
   showWeather: boolean = false;
   country: string = '';
+  description_weather: string = '';
+  showError: boolean = false;
 
   constructor(
     private weatherService: WeatherService,
@@ -34,47 +35,37 @@ export class AppComponent {
   ) { }
 
 
-
-
   searchWeatherAndPokemon() {
-    this.weatherService.getWeather(this.city).subscribe((weatherData) => {
-      this.temperature = weatherData.main.temp !== null ? Math.trunc(weatherData.main.temp) : null;
-      this.isRaining = weatherData.weather.some((w: any) => w.main === 'Rain');
-      this.cityFound = weatherData.name;
-      this.country = weatherData.sys.country;
+    this.weatherService.getWeather(this.city).subscribe(
+      (weatherData) => {
+        // Caso de sucesso: o código permanece o mesmo
+        this.temperature = weatherData.main.temp !== null ? Math.trunc(weatherData.main.temp) : null;
+        this.isRaining = weatherData.weather.some((w: any) => w.main === 'Rain');
+        this.cityFound = weatherData.name;
+        this.country = weatherData.sys.country;
+        this.weatherImage = weatherData.weather[0].icon;
+        this.description_weather = weatherData.weather[0].description;
+  
+        this.pokemonType = this.getPokemonType();
+        this.getPokemon(this.pokemonType);
+  
+        // Mostra os cards com clima e Pokémon
+        this.showWeather = true;
 
-      this.pokemonType = this.getPokemonType();
-      this.getPokemon(this.pokemonType);
+        // Aviso cidade não encontrada
+        this.showError = false;
 
-      // Chama getWeatherImage() para atualizar a imagem do clima
-      this.getWeatherImage();
-
-      //Mostra os cards com clima e pokemon
-      this.showWeather = true; 
-
-    });
-  }
-
-
-  getWeatherImage() {
-    this.weatherService.getWeather(this.city).subscribe((weatherData) => {
-      if (weatherData.weather && weatherData.weather[0].main.toLowerCase() === "clouds") {
-        this.weatherImage = "clouds.png";
-        console.log("work")
-      } else if (weatherData.weather[0].main.toLowerCase() === "clear") {
-        this.weatherImage = "clear.png"; 
-      } else if (weatherData.weather[0].main.toLowerCase() === "rain") {
-        this.weatherImage = "rain.png";
-      } else if (weatherData.weather[0].main.toLowerCase() === "drizzle") {
-        this.weatherImage = "drizzle.png";
-      } else if (weatherData.weather[0].main.toLowerCase() === "mist") {
-        this.weatherImage = "mist.png";
-      } else if (weatherData.weather[0].main.toLowerCase() === "snow") {
-        this.weatherImage = "snow.png";
-      } else {
-        this.weatherImage = "";
+      },
+      (error) => {
+        // Tratamento do erro
+        if (error.error.cod === "404") {
+          this.showError = true; // Aviso cidade não encontrada
+          this.showWeather = false; // Esconde os cards se a cidade não foi encontrada
+        } else {
+          console.error("Erro ao buscar dados do clima:", error);
+        }
       }
-    });
+    );
   }
 
 
