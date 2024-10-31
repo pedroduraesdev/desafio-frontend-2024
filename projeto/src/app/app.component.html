@@ -47,11 +47,17 @@
         <span id="city">{{ cityFound }}</span>
         <img src="https://flagsapi.com/{{ country }}/shiny/32.png" alt="Bandeira do Páis" id="country">
       </h2>
-      <p><span id="temparature">{{ temperature }} &deg;C</span></p>
       <div id="description-container">
-        <p id="description"><b >{{ isRaining ? 'Com' : 'Sem' }} chuva e </b>{{ description_weather }}</p>
+        <p id="description"><b>{{ isRaining ? 'Com' : 'Sem' }} chuva e </b>{{ description_weather }}</p>
         <img src="http://openweathermap.org/img/wn/{{ weatherImage }}.png" alt="Condicoes do tempo" id="weather-icon">
       </div>
+      <p class="circle">
+        <span class="inner-circle">
+          <span class="small-circle">
+            <span id="temparature">{{ temperature }}&deg;C</span>
+          </span>
+        </span>
+      </p>
     </div>
     <div id="details-container">
       <div class="cardPokemon">
