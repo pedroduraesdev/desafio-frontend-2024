@@ -45,10 +45,10 @@ export class AppComponent {
         this.country = weatherData.sys.country;
         this.weatherImage = weatherData.weather[0].icon;
         this.description_weather = weatherData.weather[0].description;
-  
+
         this.pokemonType = this.getPokemonType();
         this.getPokemon(this.pokemonType);
-  
+
         // Mostra os cards com clima e Pokémon
         this.showWeather = true;
 

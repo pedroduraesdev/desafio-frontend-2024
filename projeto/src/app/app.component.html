@@ -24,7 +24,11 @@
         <img src="https://flagsapi.com/{{ country }}/shiny/32.png" alt="Bandeira do Páis" id="country">
       </h2>
       <div id="description-container">
-        <p id="description"><b>{{ isRaining ? 'Com' : 'Sem' }} chuva e </b>{{ description_weather }}</p>
+        <!-- Condição para exibir apenas "Com chuva" quando estiver chovendo -->
+        <p id="description">
+          <b>{{ isRaining ? 'Com chuva' : 'Sem chuva' }}</b>
+          <span *ngIf="!isRaining">e {{ description_weather }}</span>
+        </p>
         <img src="http://openweathermap.org/img/wn/{{ weatherImage }}.png" alt="Condicoes do tempo" id="weather-icon">
       </div>
       <p class="circle">

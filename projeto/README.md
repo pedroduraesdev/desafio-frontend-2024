@@ -1,27 +1,65 @@
-# Projeto
+# Manual de Execução e Uso da Aplicação
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+Este manual contém instruções para configurar, executar e utilizar a aplicação **PokeClima**. Com ela, é possível buscar o clima de uma cidade e receber a sugestão de um Pokémon correspondente ao clima atual.
 
-## Development server
+## Pré-requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Certifique-se de ter o seguinte instalado em seu sistema:
+- **Node.js** - [Instale aqui](https://nodejs.org)
+- **Angular CLI** - Instale com o comando:
+  ```bash
+  npm install -g @angular/cli
+  ```
 
-## Code scaffolding
+## Passo a Passo para Executar a Aplicação
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. **Clonar o Repositório**  
+   Clone o projeto para o ambiente local:
+   ```bash
+   git clone https://github.com/pedroduraesdev/desafio-frontend-2024.git
+   ```
+2. **Acessar o Diretório do Projeto**  
+   Navegue até o diretório:
+   ```bash
+   cd projeto
+   ```
 
-## Build
+3. **Instalar Dependências**  
+   Instale as bibliotecas necessárias:
+   ```bash
+   npm install
+   ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+4. **Configuração do Ambiente**  
+   Verifique `environment.ts` em `src/environments/` para garantir que as chaves das APIs estão configuradas corretamente.
 
-## Running unit tests
+5. **Executar o Projeto**  
+   Inicie a aplicação:
+   ```bash
+   ng serve
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+6. **Acessar a Aplicação**  
+   No navegador, acesse `http://localhost:4200` para visualizar a aplicação.
 
-## Running end-to-end tests
+## Como Usar
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. **Buscar uma Cidade**  
+   - Digite o nome da cidade no campo "Buscar local:".
+   - Pressione **Enter** ou clique no ícone de lupa para buscar o clima.
 
-## Further help
+2. **Visualizar os Resultados**  
+   - **Condições Climáticas**: Mostra a descrição do clima, um ícone representando o tempo atual, a temperatura, a cidade e a bandeira do país.
+   - **Pokémon Sugerido**: Exibe um Pokémon correspondente ao clima, incluindo o tipo, o nome e uma imagem.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. **Manejo de Erros**  
+   - Se a cidade não for encontrada ou ocorrer um erro, será exibida uma mensagem de erro com uma imagem animada do Pikachu.
+
+## Solução de Problemas Comuns
+
+- **Erro de Dependência**: Tente `npm install` novamente ou `npm ci` para uma instalação limpa.
+- **Porta em Uso**: Use outra porta com o comando:
+  ```bash
+  ng serve --port 4300
+  ```
+- **Erro de Chave de API**: Verifique se todas as chaves de API estão corretas no `environment.ts`.
