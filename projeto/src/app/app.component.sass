@@ -1,38 +1,51 @@
 .container
   background: rgb(255,49,49)
   background: linear-gradient(180deg, rgba(255,49,49,1) 0%, rgba(255,49,49,1) 48%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 55%, rgba(255,255,255,1) 55%)
-  padding: 1.2rem
-  border-radius: 3rem
+  padding: 1.5rem
+  border-radius: 2rem
+  box-shadow: 2px 2px 20px 1px
 
 .form
   color: #fdfdfd
 
 .form h3 
   margin-bottom: 1rem
+  font-weight: bold
 
 .form-input-container
   display: flex
+  margin-top: 30px
+  position: relative
+  background-color: #000
+  border-radius: 25px
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5)
+  background-color: rgba(241, 241, 241, 0.4)
 
 .form input 
-  padding: .8rem
+  padding: 10px
   border: none
+  border-radius: 25px 0 0 25px
   flex: 1
-  border-radius: 4px
+  outline: none
+  font-size: 16px
+  color: #333
+  background: none
+  padding-left: 20px
 
 .form button
-  padding: 0.8rem
-  min-width: 50px
-  margin-left: 8px
-  background-color: #8dd0f5
-  color: #fff
+  background: none
   border: none
-  border-radius: 4px
+  color: #888
+  font-size: 18px
+  padding: 10px
+  border-radius: 0 25px 25px 0
   cursor: pointer
+  padding-right: 20px
+  
 
 #weather-data
-  border-top: 1px solid #fff
-  margin-top: 1.5rem
-  padding-top: 5px
+  margin-top: 1rem
+  padding-top: 4px
   text-align: center
   color: #fdfdfd
 
@@ -40,13 +53,13 @@
   display: flex
   justify-content: center
   align-items: center
-  margin-bottom: 0.6rem
+  margin-bottom: 0.4rem
 
 #weather-data h2 img
-  font-size: 1rem
+  font-size: 0.8rem
 
 #weather-data span
-  margin: 0.5rem
+  margin: 0.4rem
 
 #description-container
   display: flex
@@ -67,26 +80,28 @@
   text-transform: capitalize
 
 .error
-  margin-top: 1rem
+  margin-top: 0.1rem
+  position: absolute
+  margin-left: 20px
 
 .pokemonDetails
   justify-content: center
   align-items: center
-  margin: 0.6rem
+  margin: 0.4rem
 
 .pokemonDetails img 
-  height: 150px
+  height: 120px
 
 #temparature
-  font-size: 3rem
+  font-size: 2.5rem
   font-family: 'Pokemon Solid', sans-serif
-  -webkit-text-stroke: 4px #2a75bb
+  -webkit-text-stroke: 3px #2a75bb
   color: yellow
-  letter-spacing: 6px
-  padding-bottom: 15px
+  letter-spacing: 4px
+  padding-bottom: 10px
 
 #isRain
-  font-size: 1rem
+  font-size: 0.9rem
   justify-content: center
   align-items: center
 
@@ -94,10 +109,10 @@
   display: flex
   justify-content: center
   align-items: center
-  width: 200px
-  height: 200px
+  width: 180px
+  height: 180px
   border-radius: 50%
-  border: 4px solid #000000
+  border: 3px solid #000000
   background-color: #000000
   margin: auto
 
@@ -105,8 +120,8 @@
   display: flex
   justify-content: center
   align-items: center
-  width: 160px
-  height: 160px
+  width: 140px
+  height: 140px
   border-radius: 50%
   background-color: white
   position: absolute
@@ -115,8 +130,8 @@
   display: flex
   justify-content: center
   align-items: center
-  width: 150px
-  height: 150px
+  width: 130px
+  height: 130px
   border-radius: 50%
   border: 2px solid #000000
   background-color: transparent
