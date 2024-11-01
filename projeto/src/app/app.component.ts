@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WeatherService } from './services/weather.service';
 import { PokemonService } from './services/pokemon.service';
-import { get } from 'node:http';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +27,7 @@ export class AppComponent {
   country: string = '';
   description_weather: string = '';
   showError: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private weatherService: WeatherService,
@@ -58,9 +58,30 @@ export class AppComponent {
       },
       (error) => {
         // Tratamento do erro
+        this.showWeather = false; // Esconde os cards em caso de erro
+
         if (error.error.cod === "404") {
-          this.showError = true; // Aviso cidade não encontrada
-          this.showWeather = false; // Esconde os cards se a cidade não foi encontrada
+          // Cidade não encontrada
+          this.showError = true;
+          this.errorMessage = 'Cidade não encontrada. Verifique o nome e tente novamente.';
+        } else if (error.status === 400) {
+          // Erro de requisição inválida
+          this.showError = true;
+          const missingParameters = error.error.parameters || [];
+          this.errorMessage = `Erro na requisição. Parâmetros incorretos ou faltando: ${missingParameters.join(', ')}.`;
+        } else if (error.status === 401) {
+          // Erro de autenticação
+          this.showError = true;
+          this.errorMessage = 'Erro de autenticação. Verifique o token de acesso à API.';
+        } else if (error.status === 429) {
+          // Excesso de requisições
+          this.showError = true;
+          this.errorMessage = 'Excesso de requisições. Tente novamente mais tarde.';
+        } else if (error.status >= 500 && error.status < 600) {
+          // Erros internos do servidor
+          this.showError = true;
+          this.errorMessage = 'Erro inesperado no servidor. Tente novamente mais tarde.';
+          console.error("Erro no servidor:", error);
         } else {
           console.error("Erro ao buscar dados do clima:", error);
         }

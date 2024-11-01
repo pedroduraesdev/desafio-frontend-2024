@@ -1,15 +1,19 @@
-<Div class="container">
+<div class="container">
   <div class="form">
-    <h4>Encontre um Pokémon de acordo <br>com o clima de uma cidade:</h4>
-    <div class="form-input-container">
-      <input type="text" [(ngModel)]="city" placeholder="Buscar local:" id="city-input">
-      <button (click)="searchWeatherAndPokemon()" id="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+    <div class="gap">
+      <h4>Encontre um Pokémon de acordo com o clima de uma cidade:</h4>
+      <div class="form-input-container">
+        <input type="text" [(ngModel)]="city" placeholder="Buscar local:" id="city-input"
+          (keyup.enter)="searchWeatherAndPokemon()">
+        <button (click)="searchWeatherAndPokemon()" id="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
     </div>
   </div>
   <div *ngIf="showError" class="error">
-    <p>Não encotrado. Tente outra!</p>
+    <p>{{errorMessage}}</p>
+    <img src="pikachu.gif" alt="Pikachu">
   </div>
 
   <div *ngIf="showWeather" id="weather-data">
@@ -31,7 +35,7 @@
         </span>
       </p>
     </div>
-    <div id="details-container">
+    <div *ngIf="showWeather" id="details-container">
       <div class="cardPokemon">
         <div class="pokemonDetails">
           <h3>Pokémon do tipo<b> {{pokemonType}} </b>encontrado! </h3>
@@ -41,4 +45,4 @@
       </div>
     </div>
   </div>
-</Div>
+</div>
